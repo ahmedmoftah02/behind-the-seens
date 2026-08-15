@@ -284,6 +284,48 @@
     color:var(--sage);
   }
 
+  /* ---------- NAV ---------- */
+  .site-nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(251,246,239,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(22,59,46,0.08);
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:13px 0;
+  }
+  .nav-brand{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    color:var(--forest);
+    font-size:14.5px;
+  }
+  .nav-tabs{
+    display:flex;
+    gap:4px;
+    background:var(--bg-cream-2);
+    padding:4px;
+    border-radius:99px;
+  }
+  .nav-tabs a{
+    font-size:13px;
+    font-weight:600;
+    padding:7px 15px;
+    border-radius:99px;
+    color:var(--ink-soft);
+    text-decoration:none;
+    transition:background .2s ease, color .2s ease;
+  }
+  .nav-tabs a.active{
+    background:var(--forest);
+    color:var(--bg-cream);
+  }
+
   @media (max-width:420px){
     h1.title{font-size:34px;}
     .tagline{font-size:17px;}
@@ -297,6 +339,16 @@
 </style>
 </head>
 <body>
+
+<nav class="site-nav">
+  <div class="wrap nav-inner">
+    <span class="nav-brand">Behind the Seens</span>
+    <div class="nav-tabs">
+      <a href="index.html" class="active">Proposal</a>
+      <a href="documentation.html">Documentation</a>
+    </div>
+  </div>
+</nav>
 
 <!-- HERO -->
 <header class="hero">
