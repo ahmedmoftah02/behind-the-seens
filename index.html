@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Behind the Seens — The Autism &amp; Emotional AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-cream:#FBF6EF;
+    --bg-cream-2:#F1EAE0;
+    --forest:#163B2E;
+    --forest-deep:#0D2620;
+    --lavender:#8E7FBF;
+    --lavender-soft:#E7E1F4;
+    --sage:#7FA88F;
+    --gold:#D9B36C;
+    --white:#FFFFFF;
+    --ink-soft:#3E4A44;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg-cream);
+    color:var(--forest-deep);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    color:var(--forest);
+    line-height:1.15;
+    font-weight:600;
+  }
+  .wrap{
+    max-width:640px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  a{color:inherit;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:64px 0 40px;
+    background:linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-2) 100%);
+    overflow:hidden;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--lavender);
+    font-weight:600;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:16px; height:1px;
+    background:var(--lavender);
+    display:inline-block;
+  }
+  h1.title{
+    font-size:44px;
+    letter-spacing:-0.01em;
+  }
+  h1.title .accent{color:var(--lavender);}
+  .tagline{
+    font-family:'Fraunces', serif;
+    font-size:19px;
+    font-weight:500;
+    color:var(--forest);
+    margin-top:14px;
+  }
+  .tagline .muted{color:var(--sage);}
+  .subhead{
+    margin-top:16px;
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:46ch;
+  }
+
+  .hero-art{
+    margin-top:36px;
+    width:100%;
+    display:block;
+  }
+  .hero-art path.draw{
+    fill:none;
+    stroke:var(--forest);
+    stroke-width:2.4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-dasharray:900;
+    stroke-dashoffset:900;
+    animation:draw-line 2.6s ease forwards .3s;
+  }
+  .hero-art .glow{
+    opacity:0;
+    animation:glow-in 1.6s ease forwards 2.2s;
+  }
+  @keyframes draw-line{ to{ stroke-dashoffset:0; } }
+  @keyframes glow-in{ to{ opacity:1; } }
+
+  .badge-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:28px;
+    padding:9px 16px;
+    background:var(--white);
+    border:1px solid rgba(22,59,46,0.12);
+    border-radius:99px;
+    font-size:13.5px;
+    color:var(--forest);
+    font-weight:500;
+  }
+  .badge-chip svg{flex-shrink:0;}
+
+  /* ---------- CRAYON DIVIDER (signature motif) ---------- */
+  .crayon-divider{
+    width:100%;
+    height:34px;
+    display:block;
+    margin:0;
+  }
+  .crayon-divider path{
+    fill:none;
+    stroke-width:3;
+    stroke-linecap:round;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{
+    padding:52px 0;
+  }
+  section.alt{
+    background:var(--forest-deep);
+    color:var(--bg-cream);
+  }
+  section.alt h2, section.alt h3{color:var(--bg-cream);}
+  section.alt .subhead, section.alt p{color:#C9D6CE;}
+
+  .section-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:6px;
+  }
+  .section-head .icon-dot{
+    width:40px; height:40px;
+    border-radius:50%;
+    background:var(--lavender-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  section.alt .icon-dot{background:rgba(255,255,255,0.1);}
+  h2.section-title{font-size:26px;}
+  .section-rule{
+    width:44px; height:3px;
+    background:var(--sage);
+    border-radius:2px;
+    margin:14px 0 22px;
+  }
+
+  /* reveal on scroll */
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* Why it matters cards */
+  .why-list{display:flex; flex-direction:column; gap:18px; margin-top:6px;}
+  .why-item{
+    display:flex; gap:14px;
+    padding:18px;
+    background:var(--white);
+    border-radius:14px;
+    border:1px solid rgba(22,59,46,0.08);
+  }
+  .why-item .num{
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    font-weight:600;
+    color:var(--lavender);
+    flex-shrink:0;
+    width:28px;
+  }
+  .why-item h3{font-size:16.5px; margin-bottom:4px;}
+  .why-item p{font-size:14.5px; color:var(--ink-soft);}
+
+  /* How it works - real sequence, numbering earned */
+  .steps{margin-top:8px;}
+  .step{
+    display:flex; gap:16px;
+    position:relative;
+    padding-bottom:28px;
+  }
+  .step:last-child{padding-bottom:0;}
+  .step::before{
+    content:'';
+    position:absolute;
+    left:19px; top:42px; bottom:0;
+    width:1px;
+    background:rgba(251,246,239,0.18);
+  }
+  .step:last-child::before{display:none;}
+  .step-num{
+    width:40px; height:40px;
+    border-radius:50%;
+    background:var(--sage);
+    color:var(--forest-deep);
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:15px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    z-index:1;
+  }
+  .step h3{font-size:16px; color:var(--bg-cream); margin-bottom:3px;}
+  .step p{font-size:14px; color:#C9D6CE;}
+
+  /* About + disclaimer */
+  .disclaimer{
+    margin-top:24px;
+    display:flex;
+    gap:12px;
+    padding:18px;
+    border:1.5px dashed var(--sage);
+    border-radius:14px;
+    background:rgba(127,168,143,0.08);
+  }
+  .disclaimer p{font-size:14px; font-weight:600; color:var(--forest);}
+  .disclaimer p span{display:block; font-weight:400; color:var(--ink-soft); margin-top:2px;}
+
+  /* Goals grid */
+  .goals-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+    margin-top:8px;
+  }
+  .goal-card{
+    padding:16px;
+    background:var(--white);
+    border-radius:12px;
+    border:1px solid rgba(22,59,46,0.08);
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .goal-card strong{display:block; color:var(--forest); font-size:15px; margin-bottom:3px; font-family:'Fraunces',serif; font-weight:600;}
+
+  /* Vision closing */
+  .vision-quote{
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    font-weight:500;
+    line-height:1.4;
+    color:var(--forest);
+    margin-top:10px;
+  }
+  .vision-close{
+    margin-top:28px;
+    font-family:'Fraunces', serif;
+    font-size:19px;
+    color:var(--lavender);
+    font-weight:600;
+  }
+
+  footer{
+    padding:36px 0 44px;
+    text-align:center;
+    font-size:13px;
+    color:var(--sage);
+  }
+
+  @media (max-width:420px){
+    h1.title{font-size:34px;}
+    .tagline{font-size:17px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-art path.draw{animation:none; stroke-dashoffset:0;}
+    .hero-art .glow{animation:none; opacity:1;}
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">The Autism &amp; Emotional AI</div>
+    <h1 class="title">Behind <span class="accent">the</span> Seens</h1>
+    <p class="tagline">Every child has a story. <span class="muted">Not every story is heard.</span></p>
+    <p class="subhead">Looking beyond the picture — an AI-powered platform that helps parents and clinicians gain early, supportive insight into a child's emotional and developmental world, through their drawings.</p>
+
+    <svg class="hero-art" viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg">
+      <g class="glow">
+        <circle cx="470" cy="46" r="60" fill="#8E7FBF" opacity="0.14"/>
+        <circle cx="470" cy="46" r="30" fill="#D9B36C" opacity="0.18"/>
+      </g>
+      <path class="draw" d="M40,190 L40,90 L100,40 L160,90 L160,190 Z M70,190 L70,130 L120,130 L120,190 M180,190 C180,140 200,120 200,90 C200,70 210,60 210,60 M215,60 C215,60 225,70 225,90 C225,120 245,140 245,190 M270,50 L270,15 M300,190 C300,150 305,120 320,110 C335,120 340,150 340,190 M420,60 L440,40 L460,60 L480,40 L500,60" stroke="#163B2E"/>
+    </svg>
+
+    <div class="badge-chip">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" stroke="#163B2E" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#163B2E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Not a diagnosis — a supportive screening &amp; analytical tool
+    </div>
+  </div>
+</header>
+
+<svg class="crayon-divider" viewBox="0 0 560 34" preserveAspectRatio="none"><path d="M0,20 C70,5 140,32 210,18 C280,4 350,30 420,16 C490,4 530,22 560,14" stroke="#7FA88F"/></svg>
+
+<!-- WHY IT MATTERS -->
+<section>
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="icon-dot">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.4-9.5-9C1 8 3 4 7 4c2.2 0 3.8 1.3 5 3 1.2-1.7 2.8-3 5-3 4 0 6 4 4.5 8-2.5 4.6-9.5 9-9.5 9z" stroke="#8E7FBF" stroke-width="1.6"/></svg>
+      </div>
+      <h2 class="section-title">Why it matters</h2>
+    </div>
+    <p style="color:var(--ink-soft); max-width:48ch;">Every drawing tells a story. For many children — especially those who struggle to express themselves verbally — drawings can be a powerful voice.</p>
+
+    <div class="why-list">
+      <div class="why-item">
+        <div class="num">01</div>
+        <div>
+          <h3>Children may struggle to express emotions verbally</h3>
+          <p>Feelings like anxiety, frustration, or sadness often go unnoticed.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="num">02</div>
+        <div>
+          <h3>Early developmental signs can be difficult to notice</h3>
+          <p>Delays or challenges may not be apparent until critical time is lost.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="num">03</div>
+        <div>
+          <h3>Parents need accessible, supportive tools</h3>
+          <p>Guidance, clarity, and support can make a real difference in a child's future.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="alt">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="icon-dot">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="#7FA88F" stroke-width="1.6"/><path d="M19.4 13a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.9 2.9l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.6V19a2 2 0 11-4 0v-.2a1.7 1.7 0 00-1-1.6 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.9-2.9l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.6-1H4a2 2 0 110-4h.2a1.7 1.7 0 001.6-1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.9-2.9l.1.1a1.7 1.7 0 001.9.3H10a1.7 1.7 0 001-1.6V4a2 2 0 114 0v.2a1.7 1.7 0 001 1.6 1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.9 2.9l-.1.1a1.7 1.7 0 00-.3 1.9V10a1.7 1.7 0 001.6 1H20a2 2 0 110 4h-.2a1.7 1.7 0 00-1.6 1z" stroke="#7FA88F" stroke-width="1.3"/></svg>
+      </div>
+      <h2 class="section-title">How it works</h2>
+    </div>
+    <div class="steps" style="margin-top:20px;">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div><h3>Draw</h3><p>A parent uploads the child's drawing and adds brief context.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div><h3>Analyze</h3><p>AI reads visual and semantic features within the drawing.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div><h3>Screen</h3><p>The system generates emotional insights and an ASD screening probability.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div><h3>Review</h3><p>A qualified clinical expert reviews the AI-generated results.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div><h3>Support</h3><p>The expert shapes personalized guidance and activities.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div><h3>Track</h3><p>Parents follow progress and access ongoing guidance over time.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT US -->
+<section>
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="icon-dot">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.2" stroke="#8E7FBF" stroke-width="1.6"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5" stroke="#8E7FBF" stroke-width="1.6"/></svg>
+      </div>
+      <h2 class="section-title">About us</h2>
+    </div>
+    <p style="color:var(--ink-soft); max-width:50ch;">Behind the Seens is an AI-powered platform designed to help parents and clinical experts gain early, supportive insight into a child's emotional and developmental patterns through their drawings.</p>
+    <p style="color:var(--ink-soft); max-width:50ch; margin-top:12px;">We combine computer vision, AI, and human clinical expertise to turn a simple drawing into meaningful insight — supporting early intervention and personalized guidance.</p>
+    <div class="disclaimer">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-top:2px;"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" stroke="#163B2E" stroke-width="1.5"/></svg>
+      <p>Not a diagnosis.<span>A supportive screening and analytical tool, always paired with qualified clinical review.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- GOALS -->
+<section class="alt">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="icon-dot">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 21V4M4 4l14 3-3 5 3 5H4" stroke="#D9B36C" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 class="section-title">Our goals</h2>
+    </div>
+    <div class="goals-grid" style="margin-top:18px;">
+      <div class="goal-card"><strong>Early insight for parents</strong>Accessible, supportive understanding of emotional and developmental patterns.</div>
+      <div class="goal-card"><strong>Personalized support</strong>Activities and support plans built around each child and family.</div>
+      <div class="goal-card"><strong>Early ASD screening</strong>Supporting drawing-based visual analysis as an early signal.</div>
+      <div class="goal-card"><strong>Progress over time</strong>Helping parents track change through an accessible digital platform.</div>
+      <div class="goal-card"><strong>AI + human expertise</strong>Connecting AI-generated insight with qualified clinical review.</div>
+      <div class="goal-card"><strong>Responsible AI</strong>Promoting ethical, careful use of AI in child development support.</div>
+    </div>
+  </div>
+</section>
+
+<svg class="crayon-divider" viewBox="0 0 560 34" preserveAspectRatio="none"><path d="M0,20 C70,5 140,32 210,18 C280,4 350,30 420,16 C490,4 530,22 560,14" stroke="#E7E1F4"/></svg>
+
+<!-- VISION -->
+<section>
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="icon-dot">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" stroke="#163B2E" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="#163B2E" stroke-width="1.6"/></svg>
+      </div>
+      <h2 class="section-title">Vision</h2>
+    </div>
+    <p class="vision-quote">A future where every child's emotions and developmental needs can be better understood — even when they cannot fully express them through words.</p>
+    <p class="vision-close">Making every story easier to hear, understand, and support.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Behind the Seens · Scanned from our project trifold</div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.15});
+  els.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
